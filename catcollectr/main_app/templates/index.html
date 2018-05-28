@@ -1,22 +1,23 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>CatCollectr</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
-  </head>
-  <body>
-  <h1>CatCollectr</h1>
-  <hr />
+
+{% block content %}
+
   {% for cat in cats %}
-  	<p>Name: {{ cat.name }}</p>
-  	{% if cat.age > 0 %}
-      <p>Age: {{ cat.age }}</p>
-  	{% else %}
-      <p>Age: Kitten</p>
-  	{% endif %}
-  	  <hr />
-  {% endfor %}
-  <footer>All Rights Reserved, CatCollectr 2018</footer>
-  </body>
+  <a href="/{{cat.id}}">
+    <p>Name: {{ cat.name }}</p>
+  {% if cat.age > 0 %}
+    <p>Age: {{ cat.age }}</p>
+  {% else %}
+    <p>Age: Kitten</p>
+  {% endif %}
+  </a>
+	<hr />
+{% endfor %}
+<form action="post_url/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
