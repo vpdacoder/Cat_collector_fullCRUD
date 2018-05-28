@@ -16,6 +16,9 @@
       <p>Age: Kitten</p>
     {% endif %}
     <hr />
+    <a class="waves-effect waves-light btn" data-id="{{cat.id}}">
+  Likes: {% if cat.likes > 0 %} {{ cat.likes }} {% else %} None :( {% endif %}
+    </a>
   {% endfor %}
   <form action="post_url/" method="post">
       {% csrf_token %}
